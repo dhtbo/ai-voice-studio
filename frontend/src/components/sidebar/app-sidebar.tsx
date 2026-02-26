@@ -1,6 +1,5 @@
 "use server";
 
-import { UserButton } from "@daveyplate/better-auth-ui";
 import {
   Sidebar,
   SidebarContent,
@@ -15,7 +14,8 @@ import Link from "next/link";
 import SidebarMenuItems from "./sidebar-menu-itmes";
 import MobileSidebarClose from "./mobile-sidebar-close";
 import Credits from "./credits";
-// import Upgrade from "./upgrade";
+import Upgrade from "./upgrade";
+import UserButtonClient from "./user-button-client";
 
 export default async function AppSidebar() {
   return (
@@ -47,9 +47,9 @@ export default async function AppSidebar() {
       <SidebarFooter className="bg-muted/30 border-t p-3">
         <div className="mb-3 flex w-full items-center justify-center gap-2 text-xs">
           <Credits />
-          {/* <Upgrade /> */}
+          <Upgrade />
         </div>
-        <UserButton
+        <UserButtonClient
           variant="outline"
           className="border-muted-foreground/20 hover:border-primary/50 w-full transition-colors"
           disableDefaultLinks={true}
