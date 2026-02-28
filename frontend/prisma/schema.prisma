@@ -10,19 +10,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id            String    @id
-  name          String
-  email         String
-  emailVerified Boolean   @default(false)
-  image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  sessions      Session[]
-  accounts      Account[]
-  credits       Int       @default(10)   
-  audioProjects AudioProject[]
+  id             String          @id
+  name           String
+  email          String
+  emailVerified  Boolean         @default(false)
+  image          String?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  sessions       Session[]
+  accounts       Account[]
+  credits        Int             @default(10)
+  audioProjects  AudioProject[]
   uploadedVoices UploadedVoice[]
 
   @@unique([email])
@@ -30,25 +29,25 @@ model User {
 }
 
 model AudioProject {
-  id        String   @id
-  name      String
-  text      String
-  audioUrl  String
-  s3Key     String
-  language  String
-  voiceS3Key String
-  exaggeration Float @default(0.5)
-  cfgWeight Float @default(0.5)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           String   @id @default(cuid())
+  name         String
+  text         String
+  audioUrl     String
+  s3Key        String
+  language     String
+  voiceS3Key   String
+  exaggeration Float    @default(0.5)
+  cfgWeight    Float    @default(0.5)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("audio_project")
 }
 
 model UploadedVoice {
-  id        String   @id
+  id        String   @id @default(cuid())
   name      String
   s3Key     String
   url       String
